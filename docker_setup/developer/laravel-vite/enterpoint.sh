@@ -14,10 +14,6 @@ else
 
 fi
 
-MYSQL_INSTALLED=$(echo "select * from users"|mysql -u${DB_USERNAME} -p${DB_PASSWORD} -h${DB_HOST} ${DB_DATABASE}|wc -l);
-
-echo "MYSQL_INSTALLED: $MYSQL_INSTALLED";
-
 echo "Checking mysql connection";
 
 if ! mysqladmin ping -h"${DB_HOST}" --silent; then
@@ -26,5 +22,17 @@ else
     php artisan migrate;
     php artisan db:seed;
 fi
+
+if [ ! -d node_modules ] ; then
+    echo "Running: npm install";
+    npm install -g mrm
+    npm install --loglevel verbose;
+else
+    echo "node_modules FOLDER ALEADY EXISTS. Skipping npm install";
+fi
+
+export NODE_OPTIONS=--max_old_space_size=8172;
+
+npm run dev;
 
 echo "Finished";

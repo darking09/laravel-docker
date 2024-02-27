@@ -9,11 +9,15 @@ services:
       AUTORUN: 1
     build:
       context: ../../../.
-      dockerfile: ./docker_setup/developer/only-laravel/Dockerfile
-    container_name: laravel_server
+      args:
+        - NODE_VERSION=18.17.0
+      dockerfile: ./docker_setup/developer/laravel-vite/Dockerfile
+    container_name: laravel-vite_server
     volumes:
       - ../../../.:/var/www/laravel
     ports:
       - "9000:80"
+      - "3000:3000"
+      - "5173:5173"
 volumes:
   dbdata:
