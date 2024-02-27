@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+    php:
+        env_file:
+            - ../../../.env
+        environment:
+            APACHE_DOCUMENT_ROOT: /var/www/laravel/public
+            AUTORUN: 1
+        build:
+            context: ../../../.
+            args:
+                - NODE_VERSION=18.17.0
+            dockerfile: ./docker_setup/developer/mysql-laravel-vite/Dockerfile
+        container_name: mysql_laravel_sever_vite
+        volumes:
+            - ../../../.:/var/www/laravel
+        ports:
+            - "9000:80"
+            - "3000:3000"
+            - "5173:5173"
+        depends_on:
+            mysql:
+                condition: service_started
+                required: true
+    mysql:
+        image: mysql:8.3.0
+        command: --default-authentication-plugin=mysql_native_password
+        container_name: mysql_laravel_mysql_vite
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        ports:
+            - "3306:3306"
+        volumes:
+            - dbdata:/var/lib/mysql
+            - ./init:/docker-entrypoint-initdb.d
+volumes:
+  dbdata:

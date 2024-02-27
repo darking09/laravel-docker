@@ -64,12 +64,35 @@ A step by step series of examples that tell you how to get a development environ
 3. Run the following command to start the containers:
 
     ```bash
-    docker-compose -f ./docker_setup/developer/laravel-vite/docker-compose.yml up
+    docker-compose --env-file .env -f ./docker_setup/developer/mysql-laravel-vite/docker-compose.yml up
     ```
 
 4. Access the application at `http://localhost:9000/react-view`
 5. For accessing to Docker container, run the following command:
 
     ```bash
-    docker exec -it laravel-vite_server /bin/sh
+    docker exec -it laravel-vite-server /bin/sh
     ```
+
+#### Installation Laravel, MySQL and Vite with React for Development
+
+A step by step series of examples that tell you how to get a development environment running:
+
+1. Clone the repository
+2. Copy the `.env.example` file to `.env` and modify the environment variables
+3. Run the following command to start the containers:
+
+    ```bash
+    docker-compose --env-file .env -f ./docker_setup/developer/laravel-mysql-vite/docker-compose.yml up
+    ```
+
+4. Access the application at `http://localhost:9000/react-view`
+5. For accessing to Docker container, run the following command:
+
+    ```bash
+    docker exec -it mysql_laravel_sever_vite /bin/sh
+    ```
+
+## Authors
+
+![Profile picture](https://avatars.githubusercontent.com/u/4348789?s=96&v=4 "Profile picture") Fernando Torres - [Darking09](https://github.com/settings/profile) - [GitHub](https://github.com/settings/profile)
