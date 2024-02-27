@@ -16,6 +16,8 @@
         "php"
             ],
         "cSpell.words": [
+          "laravel",
+          "Laravel"
         ],
         "php.validate.executablePath": "/opt/homebrew/bin/php"
 	}
