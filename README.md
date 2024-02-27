@@ -26,7 +26,7 @@ A step by step series of examples that tell you how to get a development environ
 3. Run the following command to start the containers:
 
     ```bash
-    docker-compose up -d
+    docker-compose -f ./docker_setup/developer/only-laravel/docker-compose.yml up
     ```
 
 4. Access the application at `http://localhost:9000`
