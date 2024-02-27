@@ -23,4 +23,16 @@ else
     php artisan db:seed;
 fi
 
+if [ ! -d node_modules ] ; then
+    echo "Running: npm install";
+    npm install -g mrm
+    npm install --loglevel verbose;
+else
+    echo "node_modules FOLDER ALEADY EXISTS. Skipping npm install";
+fi
+
+export NODE_OPTIONS=--max_old_space_size=8172;
+
+npm run dev;
+
 echo "Finished";
