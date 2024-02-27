@@ -9,7 +9,7 @@ services:
       AUTORUN: 1
     build:
       context: ../../../.
-      dockerfile: ./docker_setup/developer/mysql-laravel/Dockerfile
+      dockerfile: ./docker_setup/developer/only-laravel/Dockerfile
     container_name: laravel_server
     volumes:
       - ../../../.:/var/www/laravel

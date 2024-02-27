@@ -14,7 +14,7 @@ else
 
 fi
 
-MYSQL_INSTALLED=$(echo "select * from users"|mysql -udev -pdev -hgatorade_5v5_mysql gatorade_5v5|wc -l);
+MYSQL_INSTALLED=$(echo "select * from users"|mysql -u${DB_USERNAME} -p${DB_PASSWORD} -h${DB_HOST} ${DB_DATABASE}|wc -l);
 
 echo "MYSQL_INSTALLED: $MYSQL_INSTALLED";
 
