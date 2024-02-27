@@ -12,6 +12,14 @@ RUN curl -sS https://getcomposer.org/installer > composer-setup.php
 RUN php composer-setup.php
 RUN mv composer.phar /bin/composer
 
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+RUN export NVM_DIR="$HOME/.nvm"
+RUN /bin/bash -c "[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh"
+
+ARG NODE_VERSION
+RUN /bin/bash -i -c "nvm install $NODE_VERSION && nvm use --delete-prefix $NODE_VERSION"
+
 RUN apt update
 
 RUN apt install -y acl git vim default-mysql-client libcurl4-openssl-dev libzip-dev zlib1g-dev libpng-dev libicu-dev libsqlite3-dev libxml2 libonig-dev libgd-dev libmcrypt-dev
@@ -37,5 +45,5 @@ RUN composer install
 ARG AUTORUN
 
 CMD /wait; \
-    /bin/bash -i /var/www/laravel/docker_setup/developer/laravel-mix/enterpoint.sh; \
-    /bin/sh -c "exec /usr/sbin/apache2ctl -D FOREGROUND;"
+    /bin/sh -c "exec /usr/sbin/apache2ctl -D FOREGROUND;" &\
+    /bin/bash -i /var/www/laravel/docker_setup/developer/laravel-vite/enterpoint.sh;
