@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  php:
+    env_file:
+      - ../../../.env
+    environment:
+      APACHE_DOCUMENT_ROOT: /var/www/laravel/public
+      AUTORUN: 1
+    build:
+      context: ../../../.
+      dockerfile: ./docker_setup/developer/only-laravel/Dockerfile
+    container_name: laravel_php
+    volumes:
+      - ../../../.:/var/www/laravel
+    ports:
+      - "9000:80"
+volumes:
+  dbdata:
