@@ -16,11 +16,12 @@ fi
 
 echo "Checking mysql connection";
 
-if ! mysqladmin ping -h"${DB_HOST}" --silent; then
-    echo "Connection failed. Please check your .env file";
-else
-    php artisan migrate;
-    php artisan db:seed;
-fi
+while ! mysqladmin ping -h"mysql" --silent; do
+    echo "Waiting for mysql connection...";
+    sleep 1;
+done
+
+php artisan migrate;
+php artisan db:seed;
 
 echo "Finished";
